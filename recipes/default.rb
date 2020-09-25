@@ -3,8 +3,8 @@
 # Recipe:: default
 #
 # Copyright:: 2018, The Authors, All Rights Reserved.
-ENV['AWS_ACCESS_KEY_ID'] = "ASIAXHDZVFZT7BWNNUMM"
-ENV['AWS_SECRET_ACCESS_KEY_ID'] = "Xp/VFNnQtlHA0awEbKGQscY95sEk4c22jvc7Xbn1"
+ENV['AWS_ACCESS_KEY_ID'] = ""
+ENV['AWS_SECRET_ACCESS_KEY_ID'] = ""
 ENV['AWS_REGION'] = "ap-southeast-1"
 
 remote_audit_scan 'aws scan' do
