@@ -3,6 +3,7 @@ require 'inspec'
 property :profiles, Array, required: true
 property :node_name, String, required: true
 property :target, String, required: true, sensitive: true
+property :organization_name, String, required: true
 
 default_action :run
 
@@ -12,6 +13,7 @@ action :run do
     guid = RemoteAudit::GuidManager.get(new_resource.node_name)
 
     Chef::Log.debug "Starting scan of node #{new_resource.node_name} with guid #{guid}"
+    Chef::Log.debug "Starting scan of node organization #{new_resource.organization_name}"
     runner = Inspec::Runner.new('target' => new_resource.target, 'report' => true)
 
     new_resource.profiles.each do |p|
@@ -37,6 +39,7 @@ action :run do
     results[:node_uuid] = guid
     results[:environment] = "remote_scanner_#{node.name}"
     results[:report_uuid] = SecureRandom.uuid
+    results[:organization_name] = new_resource.organization_name
 
     report_size = results.to_json.bytesize
     if report_size > 900 * 1024
